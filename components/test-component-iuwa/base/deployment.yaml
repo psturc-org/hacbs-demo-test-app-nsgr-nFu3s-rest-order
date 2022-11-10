@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/instance: test-component-iuwa
     spec:
       containers:
-      - image: quay.io/psturc/test-images:a03b10a2792842c3a4e45fb9819042e1
+      - image: quay.io/psturc/test-images@sha256:834e2c67da112424164dff1c7f0ca8de32690891cd87c46bf258907f24b024d8
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
