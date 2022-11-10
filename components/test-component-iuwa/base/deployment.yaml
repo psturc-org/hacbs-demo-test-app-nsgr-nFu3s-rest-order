@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: test-component-iuwa
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test-component-iuwa
+    app.kubernetes.io/part-of: hacbs-demo-test-app-nsgr
+  name: test-component-iuwa
+  namespace: hacbs-e2e-cmln
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: test-component-iuwa
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: test-component-iuwa
+    spec:
+      containers:
+      - image: quay.io/psturc/test-images:a03b10a2792842c3a4e45fb9819042e1
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: container-image
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          tcpSocket:
+            port: 8081
+        resources: {}
+status: {}
